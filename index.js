@@ -13,14 +13,45 @@ function mainCtrl ($scope) {
   $scope.users = [];
 
   $scope.addNew = function (user) {
+    $scope.users = [];
     $scope.users.push({ 
       name: user.name,
       url: user.url
-    }); /* [1] */
+    });
     
-    user.name = ''; /* [2] */
+    user.name = '';
     user.url = '';
   };
+  
+  $scope.toMale = function () {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+      $scope.users[0].avatarUrl = 'https://avatars.dicebear.com/v2/male/:' + text + '.svg';
+  }
+  
+  $scope.toFemale = function () {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+      $scope.users[0].avatarUrl = 'https://avatars.dicebear.com/v2/female/:' + text + '.svg';
+  }
+  
+  $scope.changeCharacter = function () {
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+      $scope.users[0].avatarUrl = $scope.users[0].avatarUrl.substring(0, 39) + text + '.svg';
+  }
 }
 
 function avatarDirective () {
@@ -34,12 +65,11 @@ function avatarDirective () {
       '<div class="Avatar">' +
         '<img ng-src="{{user.avatarUrl}}" />' +
         '<h4>{{user.name}}</h4>' +
-        '<button class"changeLook" style="outline: none; margin: 10px;">Change Look</button>' +
-        '<button class="femaleBtn" onclick="link" style="background-color: pink; outline: none; margin: 10px;">Female</button>' +
-        '<button class="maleBtn" onclick="link" style="background-color: lightblue; outline: none margin: 10px;">Male</button>' +
       '</div>'
     ), /* [3] */
-    link: link
+    link: link,
+    toGirl: toGirl,
+    toBoy: toBoy
   };
   
   function link (scope) { /* [4] */
@@ -51,12 +81,32 @@ function avatarDirective () {
   
       scope.user.avatarUrl = 'https://avatars.dicebear.com/v2/female/:' + text + '.svg';
   }
+  
+  function toGirl(scope) {
+    var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+      scope.user.avatarUrl = 'https://avatars.dicebear.com/v2/female/:' + text + '.svg';
+  }
+  
+  function toBoy(scope) {
+    var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    
+      for (var i = 0; i < 10; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+      scope.user.avatarUrl = 'https://avatars.dicebear.com/v2/male/:' + text + '.svg';
+  }
 }
 
 var modal = document.getElementById('myModal');
 var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
-var randomize = document.getElementsByClassName("changeLook");
+
 btn.onclick = function() {
     modal.style.display = "block";
 }
@@ -69,16 +119,4 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
-
-randomize.onclick = function makeid() {
-  var text = "";
-  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-  for (var i = 0; i < 10; i++)
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-
-    document.write(text);
-  return text;
 }
