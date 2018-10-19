@@ -1,28 +1,8 @@
-import Avatars from '@dicebear/avatars';
-import SpriteCollection from '@dicebear/avatars-female-sprites';
+// import Avatars from '@dicebear/avatars';
+// import SpriteCollection from '@dicebear/avatars-female-sprites';
  
-let avatars = new Avatars(SpriteCollection);
-let svg = avatars.create('custom-seed');
-
-// var app = angular.module('myApp', []);
-// app.controller('myCtrl', 
-//   function($scope, $http) {
-//   $scope.cities = [];
-//   $scope.onup = function(form) { 
-//   console.log(form);
-//   var url = "https://bioresearch.byu.edu/cs260/jquery/getcity.cgi?q="+form; 
-//     $http.get(url).then(function (response) {
-//       console.log(response);
-//       $scope.cities = response.data; 
-//     });
-//     console.log("in onup"); 
-//     url = "https://api.github.com/users/mjcleme";
-//     $http.get(url.then(function(response){
-//         console.log(response);
-        
-//     }
- 
-// });
+// let avatars = new Avatars(SpriteCollection);
+// let svg = avatars.create('custom-seed');
 
 angular.module('app', [])
   .controller('mainCtrl', mainCtrl)
@@ -52,8 +32,11 @@ function avatarDirective () {
     replace: 'true',
     template: (
       '<div class="Avatar">' +
-        '<img ng-src="{{https://avatars.dicebear.com/v2/female/:seed.svg}}" />' +
+        '<img ng-src="{{user.avatarUrl}}" />' +
         '<h4>{{user.name}}</h4>' +
+        '<button>Change Character Look</button>' +
+        '<button style="color: pink;">Female</button>' +
+        '<button style="color: blue;">Male</button>' +
       '</div>'
     ), /* [3] */
     link: link
