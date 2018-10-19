@@ -3,19 +3,64 @@
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
 <script src="rest.js"></script> 
+
+  <!-- include our dependency on angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script src="avatar.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="index.css">
+
+<script type="text/javascript" src="https://unpkg.com/@dicebear/avatars@2.0.0/dist/avatars.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@dicebear/avatars-female-sprites@1.0.0/dist/sprites.min.js"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>JS Bin</title>
 </head>
 <body>
-<div ng-app="myApp" ng-controller="myCtrl">
-<input class="edit" type="text" ng-model="form"
-              ng-keyup="onup(form)"/>
+  <div ng-app='app' ng-controller='mainCtrl' class='container'>
+    <button style="background-color: white; border: none; float: left;" type="button" class="btn btn-info btn-lg" 
+      data-toggle="modal" data-target="#myModal">
+      <img src='info.png' />  
+    </button>
+  
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">How to use</h4>
+          </div>
+          <div class="modal-body">
+            <p>Enter your name, image Url, and/or email below to create a free avatar!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+      
+    <h1 style="padding-top: 20px; margin-bottom: 15px;">Create your new character!</h1>
+    <h3>Enter your username below</h3>
 
-  <ul>
-    <li ng-repeat="line in cities"> {{line.city}}
-  </ul>
-</div>
+    <form name='userForm' ng-submit='addNew(userForm)' class='form'>
+      <input placeholder='Username' ng-model='userForm.name'/>
+      <button type='submit'>Create Character</button>
+    </form>
+    
+    <ul class='User-list'>
+      <li ng-repeat='user in users'>
+        <avatar user='user' />
+      </li>
+    </ul>
+  </div>
   
 </body>
 </html>
