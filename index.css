@@ -55,3 +55,7 @@ body {
 .container .form {
   margin-bottom: 30px;
 }
+
+.example {
+  width: 500px;
+}

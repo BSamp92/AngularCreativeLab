@@ -1,22 +1,28 @@
-var app = angular.module('myApp', []);
-app.controller('myCtrl', 
-  function($scope, $http) {
-  $scope.cities = [];
-  $scope.onup = function(form) { 
-   console.log(form);
-   var url = "https://bioresearch.byu.edu/cs260/jquery/getcity.cgi?q="+form; 
-    $http.get(url).then(function (response) {
-      console.log(response);
-      $scope.cities = response.data; 
-    });
-    console.log("in onup"); 
-    url = "https://api.github.com/users/mjcleme";
-    $http.get(url.then(function(response){
-        console.log(response);
+import Avatars from '@dicebear/avatars';
+import SpriteCollection from '@dicebear/avatars-female-sprites';
+ 
+let avatars = new Avatars(SpriteCollection);
+let svg = avatars.create('custom-seed');
+
+// var app = angular.module('myApp', []);
+// app.controller('myCtrl', 
+//   function($scope, $http) {
+//   $scope.cities = [];
+//   $scope.onup = function(form) { 
+//   console.log(form);
+//   var url = "https://bioresearch.byu.edu/cs260/jquery/getcity.cgi?q="+form; 
+//     $http.get(url).then(function (response) {
+//       console.log(response);
+//       $scope.cities = response.data; 
+//     });
+//     console.log("in onup"); 
+//     url = "https://api.github.com/users/mjcleme";
+//     $http.get(url.then(function(response){
+//         console.log(response);
         
-    }
- };
-});
+//     }
+ 
+// });
 
 angular.module('app', [])
   .controller('mainCtrl', mainCtrl)
@@ -33,6 +39,7 @@ function mainCtrl ($scope) {
     }); /* [1] */
     
     user.name = ''; /* [2] */
+    user.url = '';
   };
 }
 
@@ -45,7 +52,7 @@ function avatarDirective () {
     replace: 'true',
     template: (
       '<div class="Avatar">' +
-        '<img ng-src="{{user.avatarUrl}}" />' +
+        '<img ng-src="{{https://avatars.dicebear.com/v2/female/:seed.svg}}" />' +
         '<h4>{{user.name}}</h4>' +
       '</div>'
     ), /* [3] */
@@ -54,7 +61,7 @@ function avatarDirective () {
   
   function link (scope) { /* [4] */
     if (!scope.user.avatarUrl) {
-      scope.user.avatarUrl = 'https://www.drupal.org/files/issues/default-avatar.png';
+      scope.user.avatarUrl = 'https://avatars.dicebear.com/v2/female/:seed.svg';
     }
   }
 
